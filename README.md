@@ -29,11 +29,11 @@ The program will not work without this.
 
 A picture of the wiring is in github.
 The bottom line is:
-- Screen connected to SDA, SCL, 3.3V, and GND
-- Each Button connected to 5.0V, and GND
-- Up connected to GPIO 22
-- Down connected to GPIO 23
-- Selection connected to GPIO 27
+- On the screen: SDA connected to SDA, SCL is connected to SCL,VCC is connected to 3.3V, and GND connected to GND
+- Each Button: V connected to 5.0V, and G connected to GND
+- Right button: S connected to GPIO 22
+- Down button: S connected to GPIO 23
+- Selection button: S connected to GPIO 27
 
 ## Code:
 
