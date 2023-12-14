@@ -25,6 +25,7 @@ http://www.dafont.com/bitmap.bhp
 and the .ttf file must be contained in the same folder as the python file.
 The program will not work without this.
 ## Wiring:
+![Wiring](https://github.com/miloskud/Tic-Tac-Toe-Project/assets/24467735/f73ec7a3-47ad-4ee4-992e-7a9fe65cb442)
 
 A picture of the wiring is in github.
 The bottom line is:
