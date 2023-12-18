@@ -74,7 +74,6 @@ disp.clear()
 disp.display()
 
 # Create blank image for drawing.
-# Make sure to create image with mode '1' for 1-bit color.
 width = disp.width
 height = disp.height
 image = Image.new('1', (width, height))
@@ -85,8 +84,7 @@ draw = ImageDraw.Draw(image)
 # Draw a black filled box to clear the image.
 draw.rectangle((0,0,width,height), outline=0, fill=0)
 
-# Draw some shapes.
-# First define some constants to allow easy resizing of shapes.
+# Define some constants to allow easy resizing of shapes.
 padding = -1
 top = padding
 bottom = height-padding
@@ -104,6 +102,7 @@ board = [[" - ", " - ", " - ", " - ", " - "],
         [" - ", " - ", " - ", " - ", " - "]]
 #Check each possible win condition on the grid.
 def checkWin():
+#X win conditions
     for row in range(5):
         if((board[row][0] == " x " and board[row][1] == " x " and board[row][2] == " x " and board[row][3] == " x ") or 
            (board[row][1] == " x " and board[row][2] == " x " and board[row][3] == " x " and board[row][4] == " x ")):
@@ -149,6 +148,8 @@ def checkWin():
         if((board[1][0] == " x " and board[2][1] == " x " and board[3][2] == " x " and board[4][3] == " x ")):
             print("X VICTORY!")
             return "x"
+
+#O win conditions
         if((board[0+group][0+group] == " o " and board[1+group][1+group] == " o " and board[2+group][2+group] == " o " and board[3+group][3+group] == " o ")):
             print("O VICTORY!")
             return "o"
@@ -175,7 +176,7 @@ def checkWin():
 
     for group in range(1):
         if((board[4-group][0-group] == " x " and board[3-group][1-group] == " x " and board[2-group][2-group] == " x " and board[1-group][3-group] == " x ")):
-            print("X VICTORY!")
+            print("O VICTORY!")
             return "o"
         if((board[4-group][0-group] == " o " and board[3-group][1-group] == " o " and board[2-group][2-group] == " o " and board[1-group][3-group] == " o ")):
             print("O VICTORY!")
@@ -184,7 +185,7 @@ def checkWin():
             continue
     for group in range(1):
         if((board[4][0-group] == " x " and board[3][1-group] == " x " and board[2][2-group] == " x " and board[1][3-group] == " x ")):
-            print("X VICTORY!")
+            print("O VICTORY!")
             return "o"
         if((board[4][0-group] == " o " and board[3][1-group] == " o " and board[2][2-group] == " o " and board[1][3-group] == " o ")):
             print("O VICTORY!")
@@ -193,17 +194,18 @@ def checkWin():
             continue
     for group in range(1):
         if((board[4-group][0] == " x " and board[3-group][1] == " x " and board[2-group][2] == " x " and board[1-group][3] == " x ")):
-            print("X VICTORY!")
+            print("O VICTORY!")
             return "o"
         if((board[4-group][0] == " o " and board[3-group][1] == " o " and board[2-group][2] == " o " and board[1-group][3] == " o ")):
             print("O VICTORY!")
             return "o"
         else:
             continue
+#If neither wins, return nothing
     return ""
 
 def selectSquare(round):
-    
+#Set starting positions
     posx = 1
     posy = 1
 
@@ -227,7 +229,7 @@ def selectSquare(round):
         disp.image(image)
         disp.display()
         time.sleep(.1)
-    #Select button
+    #Selection button
         if GPIO.input(27) == GPIO.LOW:
             if(board[posy-1][posx-1] == " - "):
                 if(round % 2 == 0):
@@ -259,14 +261,18 @@ def main():
         #Check whether there is a winner (and who it is)
         winner = checkWin()
         if(winner == "x"):
+#Clear board
             draw.rectangle((0,0,130,100), outline=0, fill=0)
+#Display winner
             draw.text((6, 6), "X WINS!", font=ImageFont.truetype('rainyhearts.ttf', 30), fill=255)
             disp.image(image)
             disp.display()
             time.sleep(.5)
             break
         elif(winner == "o"):
+#Clear board
             draw.rectangle((0,0,130,100), outline=0, fill=0)
+#Display winner
             draw.text((6, 6), "O WINS!", font=ImageFont.truetype('rainyhearts.ttf', 30), fill=255)
             disp.image(image)
             disp.display()
